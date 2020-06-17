@@ -1,17 +1,19 @@
 import axios from 'axios';
 import {fetchData, fetchSuccess, fetchError} from './index';
 
-const actionCreator = url => dispatch => {
-  return new Promise(() => {
+function actionCreator(url) {
+  return (dispatch) => {
     axios
       .get(url)
-      .then(response => {
+      .then((response) => {
+        console.log(response.data.results);
+
         dispatch(fetchSuccess(response.data.results));
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch(fetchError(error));
       });
-  });
-};
+  };
+}
 
-export default actionCreator;
+export {actionCreator};
